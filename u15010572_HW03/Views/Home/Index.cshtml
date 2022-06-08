@@ -18,14 +18,14 @@
         @using (Html.BeginForm("Index", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
         {
 
-            @Html.RadioButton("Type", "document")<span>Document</span>
-            @Html.RadioButton("Type", "image")<span>Image</span>
-            @Html.RadioButton("Type", "video")<span>Video</span>
+            @Html.RadioButton("Type", "document")<span>Document</span><br/>
+            @Html.RadioButton("Type", "image")<span>Image</span><br />
+            @Html.RadioButton("Type", "video")<span>Video</span><br />
             <br />
 
             <input type="file" name="files" />
             <br />
-            <input type="submit" value="submit" />
+            <input type="submit" value="Upload" />
         }
     </div>
 </div>

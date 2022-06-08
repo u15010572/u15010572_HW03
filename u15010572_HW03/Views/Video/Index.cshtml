@@ -1,7 +1,39 @@
-﻿
+﻿@using u15010572_HW03.Models
+@model List<FileModel>
 @{
     ViewBag.Title = "Videos";
 }
 
-<h2>Videos</h2>
+<h1>Videos</h1>
+<h4>Your video gallery</h4>
+
+<div class="container-fluid content-row">
+
+    @foreach (FileModel file in Model)
+    {
+        <div class="col-md-4" style="margin-bottom:5rem;">
+            <div class="card">
+                <a class="gallery" href="../../Media/Videos/@file.FileName">
+                    <video src="../../Media/Videos/@file.FileName"
+                           class="card-img-top" style="width: 100%; height: 15vw; object-fit: cover;"
+                           alt=" " controls></video></a>
+                    <div class="card-body">
+                        <h5 class="card-title">@file.FileName</h5>
+                        <button>
+                            @Html.ActionLink("Download", "DownloadFile",
+                             new { fileName = file.FileName })
+                        </button>
+                        <button>
+                            @Html.ActionLink("Delete", "DeleteFile",
+                            new { fileName = file.FileName },
+                            new { onclick = "return confirm('Are you sure you wish to delete this?');" })
+                        </button>
+                    </div>
+</div>
+        </div>
+
+    }
+
+
+</div>
 
