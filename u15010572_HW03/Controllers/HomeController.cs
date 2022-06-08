@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.IO;
 
 namespace u15010572_HW03.Controllers
 {
@@ -12,19 +13,43 @@ namespace u15010572_HW03.Controllers
         {
             return View();
         }
+        [HttpPost]
+        public ActionResult Index(HttpPostedFileBase files, string Type)
+        {   
 
-        public ActionResult About()
+            if(files!=null && files.ContentLength>0)
+            {
+                if (Type == "document")
+                {
+                    var fileName = Path.GetFileName(files.FileName);
+                    var path = Path.Combine(Server.MapPath("~/Media/Documents/"), fileName);
+                    files.SaveAs(path);
+                }
+                if (Type == "image")
+                {
+                    var fileName = Path.GetFileName(files.FileName);
+                    var path = Path.Combine(Server.MapPath("~/Media/Images/"), fileName);
+                    files.SaveAs(path);
+                }
+                if (Type == "video")
+                {
+                    var fileName = Path.GetFileName(files.FileName);
+                    var path = Path.Combine(Server.MapPath("~/Media/Videos/"), fileName);
+                    files.SaveAs(path);
+                }
+            }
+            
+            return RedirectToAction("Index");
+        }
+            public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            ViewBag.Message = "Bryony Asrie";
 
             return View();
         }
 
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
+     
 
-            return View();
-        }
+
     }
 }
